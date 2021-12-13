@@ -1,9 +1,7 @@
 from tkinter import *
 from tkinter.filedialog import askopenfilename
 from pydub import AudioSegment
-from tqdm import tqdm
 import os
-import easygui
 
 class app():
     def __init__(self, master=None):
@@ -52,7 +50,8 @@ class app():
 
 
     def selecionaArq(self):
-        self.nome_arq = easygui.fileopenbox()# Isto te permite selecionar um arquivo
+        Tk().withdraw() # Isto torna oculto a janela principal
+        self.caminho_arq = askopenfilename() # Isto te permite selecionar um arquivo
         self.nome_musica = self.caminho_arq.split("/")[-1]
         self.nome_saida = self.nome_saida_entry.get()
   
@@ -68,13 +67,13 @@ class app():
 
         #self.final_clip.export(self.nome_saida, format="mp3")
 
-        self.msg['text'] = "Música juntada com sucesso!"
+        self.msg['text'] = "Música extendida com sucesso!"
         self.msg['fg'] = "green"
         self.msg.pack()
 
    
 root = Tk()
 
-root.title("Juntar Músicas")
+root.title("Extender Músicas")
 app(root)
 root.mainloop()
